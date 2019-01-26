@@ -9,23 +9,6 @@ namespace PretImmo2018
 	{
 		#region Propriétés
 
-		public double Mensualités
-		{
-			get
-			{
-				if (!this.Any())
-					return 0d;
-
-				//return this.Select(p => p.Mensualités)
-				//.Average();
-
-				var mensualités = 0d;
-				ForEach(m =>
-				{
-
-				});
-			}
-		}
 		public double MontantTotalPret
 		{
 			get
@@ -63,8 +46,6 @@ namespace PretImmo2018
 		{
 			ForEach(p => p.AfficheRésultats());
 
-
-			Console.WriteLine($"Mensualités de {Mensualités.ToString("N2")}");
 			Console.WriteLine($"Montant total de {MontantTotalPret.ToString("N2")}");
 			Console.WriteLine($"Coût total de {CoutTotalPret.ToString("N2")}");
 		}
