@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PretImmo2018
 {
@@ -28,7 +25,6 @@ namespace PretImmo2018
 
 		public double Mensualités { get; set; }
 		public double MontantTotalPret { get; set; }
-		public double CoutTotalPret { get; set; }
 
 		#endregion
 
@@ -36,20 +32,24 @@ namespace PretImmo2018
 
 		public int DureeEnMois { get => DureeEnAnnees * 12; }
 		public double MontantARembourser { get => MontantBien + FraisNotariés - Apport; }
-		public bool TauxAssuranceSurCapitalRestant { get; private set; }
-		public double RemboursementMensuel { get; private set; }
+		public double CoutTotalPret => MontantTotalPret - MontantARembourser;
 
 		#endregion
 
-		#region Méthodes
+		#region Méthodes publiques
 
-
+		/// <summary>
+		/// Lance les calculs
+		/// </summary>
 		public void LancerCalculs()
 		{
 			Mensualités = CalculerEcheance();
 			MontantTotalPret = CalculerMontantTotalPret();
-			CoutTotalPret = MontantTotalPret - MontantARembourser;
 		}
+		
+		/// <summary>
+		/// Affiche les résultats dans la console.
+		/// </summary>
 		public void AfficheRésultats()
 		{
 			Console.WriteLine("#############################################");
@@ -66,7 +66,12 @@ namespace PretImmo2018
 			Console.WriteLine("#############################################");
 			Console.WriteLine();
 		}
-		public double CalculerMontantTotalPret()
+
+		#endregion
+
+		#region Méthodes privées
+
+		private double CalculerMontantTotalPret()
 		{
 			var echeances = new List<Echeance>(); // les échéances de remboursement
 			var va = 0.0; // valeur actualisée
@@ -78,7 +83,7 @@ namespace PretImmo2018
 			}
 			return va;
 		}
-		public double CalculerEcheance()
+		private double CalculerEcheance()
 		{
 			return CalculRemboursementMensuel(MontantARembourser, TAEG, DureeEnMois);
 		}
