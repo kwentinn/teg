@@ -41,18 +41,5 @@ namespace PretImmo2018
 		}
 
 		#endregion
-
-		public void AfficherRésultats()
-		{
-			ForEach(p => p.AfficheRésultats());
-
-			Console.WriteLine($"Montant total de {MontantTotalPret.ToString("N2")}");
-			Console.WriteLine($"Coût total de {CoutTotalPret.ToString("N2")}");
-		}
-
-		public void LancerCalculs()
-		{
-			ForEach(p => p.LancerCalculs());
-		}
 	}
 }

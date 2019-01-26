@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PretImmo2018.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,9 @@ namespace PretImmo2018
 	{
 		static void Main(string[] args)
 		{
-			// ------------------------- //
+			var pretCalculator = new PretCalculator();
 
+			// ------------------------- //
 			var pretSeul = new Pret
 			{
 				Nom = "Crédit immo appart Carnon (teg de 1,50%)",
@@ -23,11 +25,9 @@ namespace PretImmo2018
 				FraisDeGarantie = 2413,
 				DebutPret = new DateTime(2018, 12, 1)
 			};
-			pretSeul.LancerCalculs();
-			pretSeul.AfficheRésultats();
-
+			pretCalculator.LancerCalculs(pretSeul);
+			pretCalculator.AfficheRésultats(pretSeul);
 			// ------------------------- //
-
 			var pretSeul2 = new Pret
 			{
 				Nom = "Crédit immo appart Carnon (teg de 1,65%)",
@@ -39,11 +39,9 @@ namespace PretImmo2018
 				FraisDeGarantie = 2413,
 				DebutPret = new DateTime(2018, 12, 1)
 			};
-			pretSeul2.LancerCalculs();
-			pretSeul2.AfficheRésultats();
-
+			pretCalculator.LancerCalculs(pretSeul2);
+			pretCalculator.AfficheRésultats(pretSeul2);
 			// ------------------------- //
-
 			var pretSeul3 = new Pret
 			{
 				Nom = "Crédit immo sans frais de notaire (teg de 1,65%)",
@@ -55,11 +53,9 @@ namespace PretImmo2018
 				FraisDeGarantie = 2413,
 				DebutPret = new DateTime(2018, 12, 1)
 			};
-			pretSeul3.LancerCalculs();
-			pretSeul3.AfficheRésultats();
-
+			pretCalculator.LancerCalculs(pretSeul3);
+			pretCalculator.AfficheRésultats(pretSeul3);
 			// ------------------------- //
-
 			var pret = new Pret
 			{
 				Nom = "Crédit immo appart Carnon",
@@ -81,11 +77,9 @@ namespace PretImmo2018
 				DebutPret = new DateTime(2018, 12, 1)
 			};
 			var doublePret = new PretMultiple(new Pret[] { pret, pret2 });
-			doublePret.LancerCalculs();
-			doublePret.AfficherRésultats();
-
+			pretCalculator.LancerCalculs(doublePret);
+			pretCalculator.AfficherRésultats(doublePret);
 			// ------------------------- //
-
 			var pret3 = new Pret
 			{
 				Nom = "Crédit immo appart Carnon (1,52%)",
@@ -107,8 +101,11 @@ namespace PretImmo2018
 				DebutPret = new DateTime(2018, 12, 1)
 			};
 			var doublePret2 = new PretMultiple(new Pret[] { pret3, pret4 });
-			doublePret2.LancerCalculs();
-			doublePret2.AfficherRésultats();
+			pretCalculator.LancerCalculs(doublePret2);
+			pretCalculator.AfficherRésultats(doublePret2);
+
+			var comp = new PretComparer();
+			var best = comp.GetBest(new List<Pret> { pretSeul, pretSeul2, pretSeul3 });
 
 			Console.ReadLine();
 		}
