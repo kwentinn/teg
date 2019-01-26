@@ -1,9 +1,7 @@
-﻿using PretImmo2018.Services;
+﻿using PretImmo2018.Models;
+using PretImmo2018.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PretImmo2018
 {
@@ -100,7 +98,10 @@ namespace PretImmo2018
 				TAEG = 0.946 / 100,
 				DebutPret = new DateTime(2018, 12, 1)
 			};
-			var doublePret2 = new PretMultiple(new Pret[] { pret3, pret4 });
+			var doublePret2 = new PretMultiple(new Pret[] { pret3, pret4 })
+			{
+				Nom = "Double prêt"
+			};
 			pretCalculator.LancerCalculs(doublePret2);
 			pretCalculator.AfficherRésultats(doublePret2);
 

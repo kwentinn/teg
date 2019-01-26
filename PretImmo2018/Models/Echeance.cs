@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PretImmo2018
+namespace PretImmo2018.Models
 {
 	public class Echeance
 	{

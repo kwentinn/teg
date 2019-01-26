@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PretImmo2018.Models;
+using System;
 using System.Collections.Generic;
 
 namespace PretImmo2018.Services
@@ -20,7 +21,7 @@ namespace PretImmo2018.Services
 		}
 		public void LancerCalculs(PretMultiple pretMultiple)
 		{
-			pretMultiple.ForEach(pret => LancerCalculs(pret));
+			pretMultiple.Prets.ForEach(pret => LancerCalculs(pret));
 		}
 
 		/// <summary>
@@ -44,7 +45,7 @@ namespace PretImmo2018.Services
 		}
 		public void AfficherRésultats(PretMultiple pretMultiple)
 		{
-			pretMultiple.ForEach(pret => AfficheRésultats(pret));
+			pretMultiple.Prets.ForEach(pret => AfficheRésultats(pret));
 
 			Console.WriteLine($"Montant total de {pretMultiple.MontantTotalPret.ToString("N2")}");
 			Console.WriteLine($"Coût total de {pretMultiple.CoutTotalPret.ToString("N2")}");

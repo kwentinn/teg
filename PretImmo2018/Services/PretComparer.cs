@@ -1,8 +1,6 @@
-﻿using System;
+﻿using PretImmo2018.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PretImmo2018.Services
 {
