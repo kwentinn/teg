@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PretImmo2018.Models
 {
@@ -25,6 +26,8 @@ namespace PretImmo2018.Models
 		public double Mensualités { get; set; }
 		public double MontantTotalPret { get; set; }
 
+		public List<Echeance> Echeances { get; private set; }
+
 		#endregion
 
 		#region props calculées
@@ -35,5 +38,10 @@ namespace PretImmo2018.Models
 		public DateTime FinPret => DebutPret.AddYears(DureeEnAnnees);
 
 		#endregion
+
+		public Pret()
+		{
+			Echeances = new List<Echeance>();
+		}
 	}
 }

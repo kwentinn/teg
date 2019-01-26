@@ -1,6 +1,7 @@
 ﻿using PretImmo2018.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PretImmo2018.Services
 {
@@ -22,6 +23,7 @@ namespace PretImmo2018.Services
 		public void LancerCalculs(PretMultiple pretMultiple)
 		{
 			pretMultiple.Prets.ForEach(pret => LancerCalculs(pret));
+			EtablirEcheancier(pretMultiple);
 		}
 
 		/// <summary>
@@ -57,13 +59,12 @@ namespace PretImmo2018.Services
 
 		private double CalculerMontantTotalPret(Pret pret)
 		{
-			var echeances = new List<Echeance>(); // les échéances de remboursement
 			var va = 0.0; // valeur actualisée
 			var mensualité = this.CalculRemboursementMensuel(pret.MontantARembourser, pret.TAEG, pret.DureeEnMois); // la mensualité
 			for (int t = 1; t <= pret.DureeEnMois; t++)
 			{
 				va += mensualité;
-				echeances.Add(new Echeance
+				pret.Echeances.Add(new Echeance
 				{
 					Id = t,
 					Date = pret.DebutPret.AddMonths(t),
@@ -76,6 +77,34 @@ namespace PretImmo2018.Services
 		private double CalculerEcheance(Pret pret)
 		{
 			return CalculRemboursementMensuel(pret.MontantARembourser, pret.TAEG, pret.DureeEnMois);
+		}
+		private void EtablirEcheancier(PretMultiple pretMultiple)
+		{
+			pretMultiple.DureeEnAnnees = pretMultiple.Prets.Max(p => p.DureeEnAnnees);
+			for (var t = 1; t <= pretMultiple.DureeEnMois; t++)
+			{
+				var ech = new Echeance()
+				{
+					Id = t,
+					Date = pretMultiple.DebutPret.AddMonths(t)
+				};
+				foreach (var pret in pretMultiple.Prets)
+				{
+					if (t < pret.Echeances.Count)
+					{
+						var subEch = pret.Echeances[t];
+						if (subEch != null)
+						{
+							ech.CapitalRemboursé += subEch.CapitalRemboursé;
+							ech.CapitalRestantDû += subEch.CapitalRestantDû;
+							ech.Montant += subEch.Montant;
+							ech.IntérêtsPayés += subEch.IntérêtsPayés;
+							ech.MontantDesFrais += subEch.MontantDesFrais;
+						}
+					}
+				}
+				pretMultiple.Echeances.Add(ech);
+			}
 		}
 		private double CalculRemboursementMensuel(double montantEmprunte, double tauxAnnuel, int nbEcheances)
 		{

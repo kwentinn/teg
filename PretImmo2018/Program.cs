@@ -74,7 +74,11 @@ namespace PretImmo2018
 				TAEG = 0.946 / 100,
 				DebutPret = new DateTime(2018, 12, 1)
 			};
-			var doublePret = new PretMultiple(new Pret[] { pret, pret2 });
+			var doublePret = new PretMultiple(new Pret[] { pret, pret2 })
+			{
+				Nom = "Prêt composé d'1 crédit appart + 1 crédit pour frais d'acte de vente",
+				DebutPret = new DateTime(2019, 2, 1)
+			};
 			pretCalculator.LancerCalculs(doublePret);
 			pretCalculator.AfficherRésultats(doublePret);
 			// ------------------------- //
@@ -100,7 +104,8 @@ namespace PretImmo2018
 			};
 			var doublePret2 = new PretMultiple(new Pret[] { pret3, pret4 })
 			{
-				Nom = "Double prêt"
+				Nom = "Double prêt 1.52% + 0.946%",
+				DebutPret = new DateTime(2019, 2, 1)
 			};
 			pretCalculator.LancerCalculs(doublePret2);
 			pretCalculator.AfficherRésultats(doublePret2);
