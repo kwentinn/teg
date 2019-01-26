@@ -26,33 +26,6 @@ namespace PretImmo2018.Services
 			EtablirEcheancier(pretMultiple);
 		}
 
-		/// <summary>
-		/// Affiche les résultats dans la console.
-		/// </summary>
-		public void AfficheRésultats(Pret pret)
-		{
-			Console.WriteLine("#############################################");
-			Console.WriteLine($"CREDIT \"{pret.Nom}\"");
-			Console.WriteLine();
-			Console.WriteLine($"Montant du bien: {pret.MontantBien.ToString("N2")}");
-			Console.WriteLine($"Frais de notaire: {pret.FraisNotariés.ToString("N2")}");
-			Console.WriteLine($"Montant apport: {pret.Apport.ToString("N2")}");
-			Console.WriteLine($"TAEG: {pret.TAEG.ToString("P3")}");
-			Console.WriteLine($"MontantARembourser: {pret.MontantARembourser.ToString("N2")}");
-			Console.WriteLine($"Mensualités de {pret.Mensualités.ToString("N2")} sur {pret.DureeEnAnnees} ans");
-			Console.WriteLine($"Montant total du prêt {pret.MontantTotalPret.ToString("N2")}");
-			Console.WriteLine($"Coût du prêt {pret.CoutTotalPret.ToString("N2")}");
-			Console.WriteLine("#############################################");
-			Console.WriteLine();
-		}
-		public void AfficherRésultats(PretMultiple pretMultiple)
-		{
-			pretMultiple.Prets.ForEach(pret => AfficheRésultats(pret));
-
-			Console.WriteLine($"Montant total de {pretMultiple.MontantTotalPret.ToString("N2")}");
-			Console.WriteLine($"Coût total de {pretMultiple.CoutTotalPret.ToString("N2")}");
-		}
-
 		#endregion
 
 		#region Méthodes privées

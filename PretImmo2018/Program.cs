@@ -24,7 +24,7 @@ namespace PretImmo2018
 				DebutPret = new DateTime(2018, 12, 1)
 			};
 			pretCalculator.LancerCalculs(pretSeul);
-			pretCalculator.AfficheRésultats(pretSeul);
+			AfficheRésultats(pretSeul);
 			// ------------------------- //
 			var pretSeul2 = new Pret
 			{
@@ -38,7 +38,7 @@ namespace PretImmo2018
 				DebutPret = new DateTime(2018, 12, 1)
 			};
 			pretCalculator.LancerCalculs(pretSeul2);
-			pretCalculator.AfficheRésultats(pretSeul2);
+			AfficheRésultats(pretSeul2);
 			// ------------------------- //
 			var pretSeul3 = new Pret
 			{
@@ -52,7 +52,7 @@ namespace PretImmo2018
 				DebutPret = new DateTime(2018, 12, 1)
 			};
 			pretCalculator.LancerCalculs(pretSeul3);
-			pretCalculator.AfficheRésultats(pretSeul3);
+			AfficheRésultats(pretSeul3);
 			// ------------------------- //
 			var pret = new Pret
 			{
@@ -80,7 +80,7 @@ namespace PretImmo2018
 				DebutPret = new DateTime(2019, 2, 1)
 			};
 			pretCalculator.LancerCalculs(doublePret);
-			pretCalculator.AfficherRésultats(doublePret);
+			AfficherRésultats(doublePret);
 			// ------------------------- //
 			var pret3 = new Pret
 			{
@@ -108,12 +108,39 @@ namespace PretImmo2018
 				DebutPret = new DateTime(2019, 2, 1)
 			};
 			pretCalculator.LancerCalculs(doublePret2);
-			pretCalculator.AfficherRésultats(doublePret2);
+			AfficherRésultats(doublePret2);
 
 			var comp = new PretComparer();
 			var best = comp.GetBest(new List<Pret> { pretSeul, pretSeul2, pretSeul3 });
 
 			Console.ReadLine();
+		}
+
+		/// <summary>
+		/// Affiche les résultats dans la console.
+		/// </summary>
+		public static void AfficheRésultats(Pret pret)
+		{
+			Console.WriteLine("#############################################");
+			Console.WriteLine($"CREDIT \"{pret.Nom}\"");
+			Console.WriteLine();
+			Console.WriteLine($"Montant du bien: {pret.MontantBien.ToString("N2")}");
+			Console.WriteLine($"Frais de notaire: {pret.FraisNotariés.ToString("N2")}");
+			Console.WriteLine($"Montant apport: {pret.Apport.ToString("N2")}");
+			Console.WriteLine($"TAEG: {pret.TAEG.ToString("P3")}");
+			Console.WriteLine($"MontantARembourser: {pret.MontantARembourser.ToString("N2")}");
+			Console.WriteLine($"Mensualités de {pret.Mensualités.ToString("N2")} sur {pret.DureeEnAnnees} ans");
+			Console.WriteLine($"Montant total du prêt {pret.MontantTotalPret.ToString("N2")}");
+			Console.WriteLine($"Coût du prêt {pret.CoutTotalPret.ToString("N2")}");
+			Console.WriteLine("#############################################");
+			Console.WriteLine();
+		}
+		public static void AfficherRésultats(PretMultiple pretMultiple)
+		{
+			pretMultiple.Prets.ForEach(pret => AfficheRésultats(pret));
+
+			Console.WriteLine($"Montant total de {pretMultiple.MontantTotalPret.ToString("N2")}");
+			Console.WriteLine($"Coût total de {pretMultiple.CoutTotalPret.ToString("N2")}");
 		}
 	}
 }

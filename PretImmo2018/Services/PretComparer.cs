@@ -15,7 +15,6 @@ namespace PretImmo2018.Services
 				prets.OrderBy(pret => pret.CoutTotalPret) : 
 				prets.OrderByDescending(p => p.CoutTotalPret);
 		}
-
 		public Pret GetBest(IEnumerable<Pret> prets)
 		{
 			var min = prets.Min(p => p.CoutTotalPret);
