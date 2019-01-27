@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 namespace PretImmo2018.Models
 {
-	public class Pret
+	public class Pret : IEquatable<Pret>
 	{
 		#region  props saisies
 
+		public int Id { get; set; }
 		public string Nom { get; set; }
 
 		public double MontantBien { get; set; }
@@ -43,5 +44,14 @@ namespace PretImmo2018.Models
 		{
 			Echeances = new List<Echeance>();
 		}
+
+		#region IEquatable
+
+		public bool Equals(Pret other)
+		{
+			return Id == other.Id;
+		}
+
+		#endregion
 	}
 }

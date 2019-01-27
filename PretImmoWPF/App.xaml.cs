@@ -1,6 +1,10 @@
-﻿using PretImmoWPF.ViewModels;
+﻿using PretImmo2018.Models;
+using PretImmo2018.Services;
+using PretImmo2018.Services.Interfaces;
+using PretImmoWPF.ViewModels;
 using PretImmoWPF.Views;
 using Prism.Ioc;
+using Prism.Modularity;
 using Prism.Unity;
 using System.Windows;
 
@@ -18,8 +22,26 @@ namespace PretImmoWPF
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
+			containerRegistry.RegisterSingleton<IPretCalculator, PretCalculator>();
+			containerRegistry.RegisterSingleton<IPretComparer, PretComparer>();
+
+			// on indique comment sont sérialisés les classes (Pret en l'occurence).
+			containerRegistry.RegisterSingleton<ISerializer<Pret>, JsonSerializer<Pret>>();
+
+			// services
+			containerRegistry.RegisterSingleton<IPretService, PretService>();
+
+
+
 			containerRegistry.RegisterForNavigation<PretView>();
-			
+
+			//containerRegistry.RegisterSingleton<IPretService, PretService>();
+
+		}
+
+		protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+		{
+			moduleCatalog.AddModule<PretImmo2018.PretImmo2018Module>();
 		}
 	}
 }

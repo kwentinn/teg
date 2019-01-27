@@ -77,8 +77,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\EcheancesViewModel.cs" />
+    <Compile Include="ViewModels\ListePretsViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PretViewModel.cs" />
+    <Compile Include="Views\EcheancesView.xaml.cs">
+      <DependentUpon>EcheancesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListePretsView.xaml.cs">
+      <DependentUpon>ListePretsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -89,6 +97,14 @@
     <Compile Include="Views\PretView.xaml.cs">
       <DependentUpon>PretView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\EcheancesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListePretsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +140,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PretImmo2018\PretImmo2018.csproj">
+      <Project>{0135fe26-968f-4922-9066-edc2c61e63db}</Project>
+      <Name>PretImmo2018</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

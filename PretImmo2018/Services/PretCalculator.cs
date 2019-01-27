@@ -1,4 +1,6 @@
-﻿using PretImmo2018.Models;
+﻿using PretImmo2018.Exceptions;
+using PretImmo2018.Models;
+using PretImmo2018.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,7 @@ namespace PretImmo2018.Services
 	/// <summary>
 	/// classe de calcul du prêt
 	/// </summary>
-	public class PretCalculator
+	public class PretCalculator : IPretCalculator
 	{
 		#region Méthodes publiques
 
@@ -17,8 +19,15 @@ namespace PretImmo2018.Services
 		/// </summary>
 		public void LancerCalculs(Pret pret)
 		{
-			pret.Mensualités = CalculerEcheance(pret);
-			pret.MontantTotalPret = CalculerMontantTotalPret(pret);
+			try
+			{
+				pret.Mensualités = CalculerEcheance(pret);
+				pret.MontantTotalPret = CalculerMontantTotalPret(pret);
+			}
+			catch (Exception ex)
+			{
+				throw new ServiceException("Impossible de lancer les calculs.", ex);
+			}
 		}
 		public void LancerCalculs(PretMultiple pretMultiple)
 		{

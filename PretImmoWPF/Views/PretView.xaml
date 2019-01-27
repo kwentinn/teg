@@ -17,6 +17,9 @@
 			<RowDefinition Height="40" />
 			<RowDefinition Height="40" />
 			<RowDefinition Height="40" />
+			<RowDefinition Height="40" />
+			<RowDefinition Height="40" />
+			<RowDefinition Height="40" />
 		</Grid.RowDefinitions>
 		
 		
@@ -26,10 +29,31 @@
 		<Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Montant du bien</Label>
 		<TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=MontantBien}" />
 
-		<Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Durée (en années)</Label>
-		<TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=DureeEnAnnées}" />
+		<Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Apport</Label>
+		<TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=Apport}" />
 
-		<Button Grid.Row="4" Grid.Column="1" Command="{Binding Path=SaveCommand}" Content="Save" />
+		<Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Durée (en années)</Label>
+		<TextBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=DureeEnAnnées}" />
+
+		<Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center">Frais notariés</Label>
+		<TextBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=FraisNotariés}" />
+
+		<Label Grid.Row="5" Grid.Column="0" VerticalAlignment="Center">TAEG</Label>
+		<TextBox Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=TAEG}" />
+
+		<Label Grid.Row="6" Grid.Column="0" VerticalAlignment="Center">Frais de garantie</Label>
+		<TextBox Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=FraisDeGarantie}" />
+
+		<Label Grid.Row="7" Grid.Column="0" VerticalAlignment="Center">Debut du prêt</Label>
+		<DatePicker Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=DebutPret}" />
+
+		<Button Grid.Row="8" Grid.Column="0" 				
+				Content="Enregistrer" VerticalAlignment="Center" Padding="3" Margin="2"
+				Command="{Binding Path=SaveCommand}" />
+		
+		<Button Grid.Row="8" Grid.Column="1" 
+				Content="Calculer" VerticalAlignment="Center" Padding="3" Margin="2"
+				Command="{Binding CalculerCommand}"  />
 
 	</Grid>
 </UserControl>
