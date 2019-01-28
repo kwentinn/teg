@@ -2,10 +2,12 @@
 using PretImmo2018.Services;
 using PretImmo2018.Services.Interfaces;
 using PretImmoWPF.Commands;
+using PretImmoWPF.Config;
 using PretImmoWPF.ViewModels;
 using PretImmoWPF.Views;
 using Prism.Ioc;
 using Prism.Modularity;
+using Prism.Regions;
 using Prism.Unity;
 using System.Windows;
 
@@ -40,6 +42,16 @@ namespace PretImmoWPF
 		protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
 		{
 			moduleCatalog.AddModule<PretImmo2018.PretImmo2018Module>();
+		}
+
+		protected override void OnInitialized()
+		{
+			base.OnInitialized();
+			var regionManager = this.Container.Resolve<IRegionManager>();
+			regionManager.RegisterViewWithRegion(RegionNames.MainRegion, typeof(ListePretsView));
+			regionManager.RegisterViewWithRegion(RegionNames.ActionRegion, typeof(PretView));
+			regionManager.RegisterViewWithRegion(RegionNames.DetailsRegion, typeof(EcheancesView));
+
 		}
 	}
 }

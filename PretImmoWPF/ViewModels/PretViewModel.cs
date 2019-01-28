@@ -45,14 +45,18 @@ namespace PretImmoWPF.ViewModels
 
 		private void Save()
 		{
-			var p = new Pret() { Nom = this.Nom };
-			_pretService.Save(p);
+			if (CurrentPret != null)
+			{
+				_pretService.Save(CurrentPret);
+			}
 		}
 
 		private void Calculate()
 		{
-			var p = new Pret() { Nom = this.Nom };
-			_pretCalculator.LancerCalculs(p);
+			if (CurrentPret != null)
+			{
+				_pretCalculator.LancerCalculs(CurrentPret);
+			}
 		}
 	}
 }

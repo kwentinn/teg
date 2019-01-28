@@ -1,5 +1,10 @@
-﻿using System;
+﻿using PretImmo2018.Models;
+using PretImmoWPF.ViewModels;
+using Prism.Common;
+using Prism.Regions;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +28,14 @@ namespace PretImmoWPF.Views
 		public EcheancesView()
 		{
 			InitializeComponent();
+			RegionContext.GetObservableContext(this).PropertyChanged += SelectedPret_PropertyChanged;
+		}
+
+		private void SelectedPret_PropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			var context = (ObservableObject<object>)sender;
+			var selectedPret = (Pret)context.Value;
+			(DataContext as EcheancesViewModel).CurrentPret = selectedPret;
 		}
 	}
 }

@@ -8,8 +8,5 @@ namespace PretImmo2018.Services.Interfaces
 	{
 		Task Save(Pret pret);
 		Task<IEnumerable<Pret>> GetAllAsync();
-
-		Pret SelectedPret { get; set; }
-		IEnumerable<Pret> AllPrets { get; set; }
 	}
 }

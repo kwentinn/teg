@@ -9,6 +9,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-		<TextBlock Text="Echéances" FontSize="30" />
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<TextBlock Grid.Row="0" Text="Echéancier" FontSize="30" VerticalAlignment="Center" />
+		<ListBox x:Name="ListBoxEcheances" Grid.Row="1" 
+				 ItemsSource="{Binding CurrentPret.Echeances}">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Echéance n° " />
+						<TextBlock Text="{Binding Id}" />
+						<TextBlock Text=" le " />
+						<TextBlock Text="{Binding Date}" />
+						<TextBlock Text=" - Montant de " />
+						<TextBlock Text="{Binding Montant, StringFormat=C2}" />
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
 	</Grid>
 </UserControl>
