@@ -7,8 +7,41 @@
 			 xmlns:prism="http://prismlibrary.com/"
 			 prism:ViewModelLocator.AutoWireViewModel="True"
 			 mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-		<TextBlock Text="Liste des prêts" FontSize="30" />
+			 xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+			 d:DesignHeight="450" d:DesignWidth="800">
+	
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<i:InvokeCommandAction Command="{Binding OnLoadedCommand}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+	
+	<Grid>
+		
+		<Grid.RowDefinitions>
+			<RowDefinition Height="40"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		
+		<TextBlock Grid.Row="0" Text="Liste des prêts" FontSize="30" />
+		
+		<ListBox Grid.Row="1" 
+				 ItemsSource="{Binding Prets}" 
+				 SelectedItem="{Binding SelectedPret, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="SelectionChanged">
+					<i:InvokeCommandAction Command="{Binding AppCommands.SelectedItemCommand}"/>
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="{Binding Nom}" />
+						<TextBlock Text=" - Montant de " />
+						<TextBlock Text="{Binding MontantBien, StringFormat=C2}" />
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
 	</Grid>
 </UserControl>

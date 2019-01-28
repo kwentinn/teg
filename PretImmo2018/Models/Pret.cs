@@ -17,7 +17,7 @@ namespace PretImmo2018.Models
 		public double TauxNominal { get; set; }
 		public double TAEG { get; set; }
 
-		public DateTime DebutPret { get; set; }
+		public DateTime? DebutPret { get; set; }
 
 		public double FraisDeDossier { get; set; }
 		public double FraisDAssurance { get; set; }
@@ -36,7 +36,7 @@ namespace PretImmo2018.Models
 		public int DureeEnMois => DureeEnAnnees * 12;
 		public double MontantARembourser => MontantBien + FraisNotariés - Apport;
 		public double CoutTotalPret => MontantTotalPret - MontantARembourser;
-		public DateTime FinPret => DebutPret.AddYears(DureeEnAnnees);
+		public DateTime? FinPret => DebutPret.HasValue ? DebutPret.Value.AddYears(DureeEnAnnees) : (DateTime?)null;
 
 		#endregion
 

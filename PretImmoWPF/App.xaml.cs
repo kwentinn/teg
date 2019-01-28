@@ -1,6 +1,7 @@
 ﻿using PretImmo2018.Models;
 using PretImmo2018.Services;
 using PretImmo2018.Services.Interfaces;
+using PretImmoWPF.Commands;
 using PretImmoWPF.ViewModels;
 using PretImmoWPF.Views;
 using Prism.Ioc;
@@ -30,13 +31,10 @@ namespace PretImmoWPF
 
 			// services
 			containerRegistry.RegisterSingleton<IPretService, PretService>();
+			containerRegistry.RegisterSingleton<IAppCommands, AppCommands>();
 
-
-
-			containerRegistry.RegisterForNavigation<PretView>();
-
-			//containerRegistry.RegisterSingleton<IPretService, PretService>();
-
+			// nav
+			//containerRegistry.RegisterForNavigation<PretView>();
 		}
 
 		protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

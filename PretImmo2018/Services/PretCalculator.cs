@@ -43,13 +43,16 @@ namespace PretImmo2018.Services
 		{
 			var va = 0.0; // valeur actualisée
 			var mensualité = this.CalculRemboursementMensuel(pret.MontantARembourser, pret.TAEG, pret.DureeEnMois); // la mensualité
+
+			var startDate = pret.DebutPret.HasValue ? pret.DebutPret.Value : DateTime.Now;
+
 			for (int t = 1; t <= pret.DureeEnMois; t++)
 			{
 				va += mensualité;
 				pret.Echeances.Add(new Echeance
 				{
 					Id = t,
-					Date = pret.DebutPret.AddMonths(t),
+					Date = startDate.AddMonths(t),
 					Montant = mensualité,
 					CapitalRemboursé = va
 				});
@@ -63,12 +66,15 @@ namespace PretImmo2018.Services
 		private void EtablirEcheancier(PretMultiple pretMultiple)
 		{
 			pretMultiple.DureeEnAnnees = pretMultiple.Prets.Max(p => p.DureeEnAnnees);
+
+			var startDate = pretMultiple.DebutPret.HasValue ? pretMultiple.DebutPret.Value : DateTime.Now;
+
 			for (var t = 1; t <= pretMultiple.DureeEnMois; t++)
 			{
-				var ech = new Echeance()
+				var ech = new Echeance
 				{
 					Id = t,
-					Date = pretMultiple.DebutPret.AddMonths(t)
+					Date = startDate.AddMonths(t)
 				};
 				foreach (var pret in pretMultiple.Prets)
 				{

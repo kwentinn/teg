@@ -1,5 +1,6 @@
 ﻿using PretImmo2018.Models;
 using PretImmo2018.Services.Interfaces;
+using PretImmoWPF.Commands;
 using Prism.Commands;
 using Prism.Mvvm;
 
@@ -9,10 +10,17 @@ namespace PretImmoWPF.ViewModels
 	{
 		private IPretService _pretService;
 		private IPretCalculator _pretCalculator;
+		private IAppCommands _appCommands;
 
 		public DelegateCommand SaveCommand { get; private set; }
 		public DelegateCommand CalculerCommand { get; set; }
 
+		private Pret _currentPret;
+		public Pret CurrentPret
+		{
+			get { return _currentPret; }
+			set { SetProperty(ref _currentPret, value); }
+		}
 
 		private string _nom;
 		public string Nom
@@ -21,13 +29,18 @@ namespace PretImmoWPF.ViewModels
 			set { SetProperty(ref _nom, value); }
 		}
 
-		public PretViewModel(IPretService pretService, IPretCalculator pretCalculator)
+		public PretViewModel(IPretService pretService, IPretCalculator pretCalculator, IAppCommands appCommands)
 		{
 			_pretService = pretService;
 			_pretCalculator = pretCalculator;
 
 			SaveCommand = new DelegateCommand(Save);
 			CalculerCommand = new DelegateCommand(Calculate);
+		}
+
+		private void Load(Pret pret)
+		{
+			CurrentPret = pret;
 		}
 
 		private void Save()

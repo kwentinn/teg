@@ -13,9 +13,20 @@ namespace PretImmo2018.Services
 	{
 		string _fileName = $"{(typeof(T)).Name}.json";
 
-		public Task<IEnumerable<T>> DeserializeAll()
+		public async Task<IEnumerable<T>> DeserializeAll()
 		{
-			throw new NotImplementedException();
+			string content = null;
+			using (var sw = new StreamReader(_fileName, Encoding.UTF8))
+			{
+				content = await sw.ReadToEndAsync();
+			}
+
+			if (string.IsNullOrWhiteSpace(content))
+			{
+				return new List<T>();
+			}
+
+			return JsonConvert.DeserializeObject<List<T>>(content);
 		}
 
 

@@ -4,10 +4,10 @@
              xmlns:local="clr-namespace:PretImmoWPF.Views"
 			 xmlns:prism="http://prismlibrary.com/"
 			 prism:ViewModelLocator.AutoWireViewModel="True">
+	
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="200" />
-			<ColumnDefinition Width="300" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
@@ -24,28 +24,28 @@
 		
 		
 		<Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Nom du prêt</Label>
-		<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=Nom}" VerticalAlignment="Center" />
+		<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=CurrentPret.Nom}" VerticalAlignment="Center" />
 
 		<Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Montant du bien</Label>
-		<TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=MontantBien}" />
+		<TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=CurrentPret.MontantBien}" />
 
 		<Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Apport</Label>
-		<TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=Apport}" />
+		<TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=CurrentPret.Apport}" />
 
 		<Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Durée (en années)</Label>
-		<TextBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=DureeEnAnnées}" />
+		<TextBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=CurrentPret.DureeEnAnnées}" />
 
 		<Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center">Frais notariés</Label>
-		<TextBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=FraisNotariés}" />
+		<TextBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=CurrentPret.FraisNotariés}" />
 
 		<Label Grid.Row="5" Grid.Column="0" VerticalAlignment="Center">TAEG</Label>
-		<TextBox Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=TAEG}" />
+		<TextBox Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=CurrentPret.TAEG}" />
 
 		<Label Grid.Row="6" Grid.Column="0" VerticalAlignment="Center">Frais de garantie</Label>
-		<TextBox Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=FraisDeGarantie}" />
+		<TextBox Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=CurrentPret.FraisDeGarantie}" />
 
 		<Label Grid.Row="7" Grid.Column="0" VerticalAlignment="Center">Debut du prêt</Label>
-		<DatePicker Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=DebutPret}" />
+		<DatePicker Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=CurrentPret.DebutPret}" />
 
 		<Button Grid.Row="8" Grid.Column="0" 				
 				Content="Enregistrer" VerticalAlignment="Center" Padding="3" Margin="2"
