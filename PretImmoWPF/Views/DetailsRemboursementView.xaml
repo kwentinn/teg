@@ -1,20 +1,38 @@
-﻿<UserControl x:Class="PretImmoWPF.Views.EcheancesView"
+﻿<UserControl x:Class="PretImmoWPF.Views.DetailsRemboursementView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PretImmoWPF.Views"
 			 xmlns:prism="http://prismlibrary.com/"
 			 prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="50"/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>
+			<!--<RowDefinition Height="30"/>-->
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		<TextBlock Grid.Row="0" Text="Echéancier" FontSize="30" VerticalAlignment="Center" />
-		<ListBox x:Name="ListBoxEcheances" Grid.Row="1" 
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="200" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Détails du remboursement" FontSize="30" VerticalAlignment="Center" />
+
+		<TextBlock Grid.Row="1" Grid.Column="0" Text="Coût total du prêt" />
+		<TextBlock Grid.Row="1"  Grid.Column="1" Text="{Binding Path=CurrentPret.CoutTotalPret,StringFormat=C2}" />
+
+		<TextBlock Grid.Row="2" Grid.Column="0" Text="Durée du prêt (en mois)" />
+		<TextBlock Grid.Row="2"  Grid.Column="1" Text="{Binding Path=CurrentPret.DureeEnMois}" />
+		
+		<TextBlock Grid.Row="3" Grid.Column="0" Text="Montant à rembourser" />
+		<TextBlock Grid.Row="3"  Grid.Column="1" Text="{Binding Path=CurrentPret.MontantARembourser, StringFormat=C2}" />
+
+		<ListBox x:Name="ListBoxEcheances" Grid.Row="4" Grid.ColumnSpan="2"
 				 ItemsSource="{Binding CurrentPret.Echeances}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>

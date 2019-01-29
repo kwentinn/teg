@@ -1,4 +1,5 @@
-﻿using PretImmo2018.Models;
+﻿using System;
+using PretImmo2018.Models;
 using PretImmo2018.Services.Interfaces;
 using PretImmoWPF.Commands;
 using Prism.Commands;
@@ -13,7 +14,7 @@ namespace PretImmoWPF.ViewModels
 		private IAppCommands _appCommands;
 
 		public DelegateCommand SaveCommand { get; private set; }
-		public DelegateCommand CalculerCommand { get; set; }
+		public DelegateCommand CalculerCommand { get; private set; }
 
 		private Pret _currentPret;
 		public Pret CurrentPret
@@ -38,16 +39,12 @@ namespace PretImmoWPF.ViewModels
 			CalculerCommand = new DelegateCommand(Calculate);
 		}
 
-		private void Load(Pret pret)
-		{
-			CurrentPret = pret;
-		}
 
 		private void Save()
 		{
 			if (CurrentPret != null)
 			{
-				_pretService.Save(CurrentPret);
+				_pretService.SaveAsync(CurrentPret);
 			}
 		}
 
@@ -56,6 +53,7 @@ namespace PretImmoWPF.ViewModels
 			if (CurrentPret != null)
 			{
 				_pretCalculator.LancerCalculs(CurrentPret);
+				RaisePropertyChanged(nameof(CurrentPret));
 			}
 		}
 	}

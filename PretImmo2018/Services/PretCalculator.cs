@@ -2,7 +2,6 @@
 using PretImmo2018.Models;
 using PretImmo2018.Services.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace PretImmo2018.Services
@@ -21,6 +20,7 @@ namespace PretImmo2018.Services
 		{
 			try
 			{
+				pret.Echeances.Clear();
 				pret.Mensualités = CalculerEcheance(pret);
 				pret.MontantTotalPret = CalculerMontantTotalPret(pret);
 			}

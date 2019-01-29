@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace PretImmoWPF.ViewModels
 {
-	public class EcheancesViewModel : BindableBase
+	public class DetailsRemboursementViewModel : BindableBase
 	{
 		private Pret _currentPret;
 		public Pret CurrentPret
@@ -16,7 +16,7 @@ namespace PretImmoWPF.ViewModels
 			}
 		}
 
-		public EcheancesViewModel()
+		public DetailsRemboursementViewModel()
 		{
 		}
 	}

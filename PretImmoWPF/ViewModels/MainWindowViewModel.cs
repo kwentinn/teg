@@ -1,14 +1,5 @@
-﻿using PretImmo2018.Services.Interfaces;
-using PretImmoWPF.Config;
-using PretImmoWPF.Views;
-using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using Prism.Regions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PretImmoWPF.ViewModels
 {
@@ -26,10 +17,6 @@ namespace PretImmoWPF.ViewModels
 		public MainWindowViewModel(IRegionManager regionManager)
 		{
 			_regionManager = regionManager;
-
-			//_regionManager.RegisterViewWithRegion(RegionNames.MainRegion, typeof(ListePretsView));
-			//_regionManager.RegisterViewWithRegion(RegionNames.ActionRegion, typeof(PretView));
-			//_regionManager.RegisterViewWithRegion(RegionNames.DetailsRegion, typeof(EcheancesView));
 		}
 	}
 }

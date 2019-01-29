@@ -21,11 +21,11 @@ using System.Windows.Shapes;
 namespace PretImmoWPF.Views
 {
 	/// <summary>
-	/// Logique d'interaction pour EcheancesView.xaml
+	/// Logique d'interaction pour DetailsRemboursementView.xaml
 	/// </summary>
-	public partial class EcheancesView : UserControl
+	public partial class DetailsRemboursementView : UserControl
 	{
-		public EcheancesView()
+		public DetailsRemboursementView()
 		{
 			InitializeComponent();
 			RegionContext.GetObservableContext(this).PropertyChanged += SelectedPret_PropertyChanged;
@@ -35,7 +35,7 @@ namespace PretImmoWPF.Views
 		{
 			var context = (ObservableObject<object>)sender;
 			var selectedPret = (Pret)context.Value;
-			(DataContext as EcheancesViewModel).CurrentPret = selectedPret;
+			(DataContext as DetailsRemboursementViewModel).CurrentPret = selectedPret;
 		}
 	}
 }

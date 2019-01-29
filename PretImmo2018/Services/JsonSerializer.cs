@@ -16,31 +16,41 @@ namespace PretImmo2018.Services
 		public async Task<IEnumerable<T>> DeserializeAll()
 		{
 			string content = null;
-			using (var sw = new StreamReader(_fileName, Encoding.UTF8))
+			try
 			{
-				content = await sw.ReadToEndAsync();
-			}
+				using (var sw = new StreamReader(_fileName, Encoding.UTF8))
+				{
+					content = await sw.ReadToEndAsync();
+				}
 
-			if (string.IsNullOrWhiteSpace(content))
+				if (string.IsNullOrWhiteSpace(content))
+				{
+					return new List<T>();
+				}
+
+				return JsonConvert.DeserializeObject<List<T>>(content);
+			}
+			catch (Exception ex)
 			{
+				Console.WriteLine(ex);
 				return new List<T>();
 			}
-
-			return JsonConvert.DeserializeObject<List<T>>(content);
 		}
-
 
 		public async Task SerializeObject(T obj)
 		{
-
-			//File.Create(_fileName);
-
 			string content = null;
-			using (var sw = new StreamReader(_fileName, Encoding.UTF8))
+			try
 			{
-				content = await sw.ReadToEndAsync();
+				using (var sw = new StreamReader(_fileName, Encoding.UTF8))
+				{
+					content = await sw.ReadToEndAsync();
+				}
 			}
-
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
+			}
 			var listOfTs = new List<T>();
 
 			if (!string.IsNullOrEmpty(content))

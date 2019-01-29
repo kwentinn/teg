@@ -50,7 +50,7 @@ namespace PretImmoWPF
 			var regionManager = this.Container.Resolve<IRegionManager>();
 			regionManager.RegisterViewWithRegion(RegionNames.MainRegion, typeof(ListePretsView));
 			regionManager.RegisterViewWithRegion(RegionNames.ActionRegion, typeof(PretView));
-			regionManager.RegisterViewWithRegion(RegionNames.DetailsRegion, typeof(EcheancesView));
+			regionManager.RegisterViewWithRegion(RegionNames.DetailsRegion, typeof(DetailsRemboursementView));
 
 		}
 	}
