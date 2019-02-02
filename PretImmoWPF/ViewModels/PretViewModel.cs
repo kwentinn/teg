@@ -1,5 +1,4 @@
-﻿using System;
-using PretImmo2018.Models;
+﻿using PretImmo2018.Models;
 using PretImmo2018.Services.Interfaces;
 using PretImmoWPF.Commands;
 using Prism.Commands;
@@ -9,9 +8,9 @@ namespace PretImmoWPF.ViewModels
 {
 	public class PretViewModel : BindableBase
 	{
-		private IPretService _pretService;
-		private IPretCalculator _pretCalculator;
-		private IAppCommands _appCommands;
+		private readonly IPretService _pretService;
+		private readonly IPretCalculator _pretCalculator;
+		private readonly IAppCommands _appCommands;
 
 		public DelegateCommand SaveCommand { get; private set; }
 		public DelegateCommand CalculerCommand { get; private set; }
@@ -34,27 +33,28 @@ namespace PretImmoWPF.ViewModels
 		{
 			_pretService = pretService;
 			_pretCalculator = pretCalculator;
+			_appCommands = appCommands;
 
 			SaveCommand = new DelegateCommand(Save);
 			CalculerCommand = new DelegateCommand(Calculate);
 		}
 
-
 		private void Save()
 		{
-			if (CurrentPret != null)
-			{
-				_pretService.SaveAsync(CurrentPret);
-			}
+			if (CurrentPret == null)
+				return;
+
+			_pretService.Add(CurrentPret);
+			_pretService.Save();
 		}
 
 		private void Calculate()
 		{
-			if (CurrentPret != null)
-			{
-				_pretCalculator.LancerCalculs(CurrentPret);
-				RaisePropertyChanged(nameof(CurrentPret));
-			}
+			if (CurrentPret == null)
+				return;
+
+			_pretCalculator.LancerCalculs(CurrentPret);
+			RaisePropertyChanged(nameof(CurrentPret));
 		}
 	}
 }

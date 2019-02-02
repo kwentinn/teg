@@ -1,10 +1,15 @@
-﻿using System;
+﻿using PretImmo2018.Services.Interfaces;
+using System;
 
 namespace PretImmo2018.Models
 {
-	public class Echeance
+	public class Echeance: IIdentifiable
 	{
-		public int Id { get; set; }
+		#region IIdentifiable
+
+		public int ID { get; set; }
+
+		#endregion
 
 		public DateTime	Date { get; set; }
 		public double Montant { get; set; }

@@ -1,10 +1,17 @@
-﻿using System;
+﻿using PretImmo2018.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace PretImmo2018.Models
 {
-	public class Pret : IEquatable<Pret>
+	public class Pret : IEquatable<Pret>, IIdentifiable
 	{
+		#region IIdentifiable
+
+		public int ID { get; set; }
+
+		#endregion
+
 		#region  props saisies
 
 		public int Id { get; set; }

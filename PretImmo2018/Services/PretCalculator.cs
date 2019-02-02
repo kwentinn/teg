@@ -51,7 +51,7 @@ namespace PretImmo2018.Services
 				va += mensualité;
 				pret.Echeances.Add(new Echeance
 				{
-					Id = t,
+					ID = t,
 					Date = startDate.AddMonths(t),
 					Montant = mensualité,
 					CapitalRemboursé = va
@@ -73,7 +73,7 @@ namespace PretImmo2018.Services
 			{
 				var ech = new Echeance
 				{
-					Id = t,
+					ID = t,
 					Date = startDate.AddMonths(t)
 				};
 				foreach (var pret in pretMultiple.Prets)

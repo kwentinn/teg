@@ -1,55 +1,67 @@
 ﻿using PretImmo2018.Models;
 using PretImmo2018.Services.Interfaces;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace PretImmo2018.Services
 {
 	public class PretService : IPretService
 	{
-		ISerializer<Pret> _serializer;
+		private readonly IRepository<Pret> _pretRepository;
 
-		public PretService(ISerializer<Pret> serializer)
+		public ObservableCollection<Pret> Prets { get; private set; }
+
+
+		public PretService(IRepository<Pret> pretRepo)
 		{
-			_serializer = serializer;
+			_pretRepository = pretRepo;
+
+			Prets = new ObservableCollection<Pret>();
 		}
 
-		public async Task Add(Pret pret)
+		public void Add(Pret pret)
 		{
 			// choper le max id + 1 pour le nouvel id
-			var id = 1;
-			var prets = await _serializer.DeserializeAll();
+			var id = 0;
+			var prets = _pretRepository.GetAll();
 			if (prets.Any())
 			{
-				id = prets.Select(p => p.Id).Max() + 1;
+				id = prets.Max(p => p.Id) + 1;
 			}
 			pret.Id = id;
-			await SaveAsync(pret);
+
+			Prets.Add(pret);
 		}
 
-		public async Task<IEnumerable<Pret>> GetAllAsync()
+		public IEnumerable<Pret> GetAll()
 		{
-			return await _serializer.DeserializeAll();
-		}
-
-		public async Task Remove(int id)
-		{
-			var list = (List<Pret>)await _serializer.DeserializeAll();
-			if (!list.Any())
-				return;
-
-			var pret = list.FirstOrDefault(p => p.Id == id);
-			if (pret != null)
+			Prets.Clear();
+			var prets = _pretRepository.GetAll();
+			foreach (var p in prets)
 			{
-				list.Remove(pret);
+				Prets.Add(p);
 			}
-
+			return prets;
 		}
 
-		public async Task SaveAsync(Pret pret)
+		public void Remove(int id)
 		{
-			await _serializer.SerializeObject(pret);
+			var removedItem = _pretRepository.Remove(id);
+			if (removedItem != null)
+			{
+				Prets.Remove(removedItem);
+			}
+		}
+
+		public void Save()
+		{
+			_pretRepository.Save();
+		}
+
+		public Pret Get(int id)
+		{
+			throw new System.NotImplementedException();
 		}
 	}
 }

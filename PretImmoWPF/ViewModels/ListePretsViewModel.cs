@@ -43,15 +43,16 @@ namespace PretImmoWPF.ViewModels
 			if (SelectedPret != null)
 			{
 				_pretService.Remove(SelectedPret.Id);
+				Prets.Remove(SelectedPret);
 				SelectedPret = null;
 			}
 		}
 
-		private async void OnLoad()
+		private void OnLoad()
 		{
 			Prets.Clear();
 
-			var prets = await _pretService.GetAllAsync();
+			var prets = _pretService.GetAll();
 
 			Prets.AddRange(prets);
 		}

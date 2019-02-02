@@ -29,7 +29,7 @@ namespace PretImmoWPF
 			containerRegistry.RegisterSingleton<IPretComparer, PretComparer>();
 
 			// on indique comment sont sérialisés les classes (Pret en l'occurence).
-			containerRegistry.RegisterSingleton<ISerializer<Pret>, JsonSerializer<Pret>>();
+			containerRegistry.RegisterSingleton<IRepository<Pret>, JsonRepository<Pret>>();
 
 			// services
 			containerRegistry.RegisterSingleton<IPretService, PretService>();
