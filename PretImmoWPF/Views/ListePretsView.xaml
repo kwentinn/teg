@@ -36,7 +36,7 @@
 		</StackPanel>
 
 		<ListBox x:Name="ListBoxPrets" Grid.Row="2" 
-				 ItemsSource="{Binding Prets}" 
+				 ItemsSource="{Binding Path=PretService.Prets}" 
 				 SelectedItem="{Binding SelectedPret, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>

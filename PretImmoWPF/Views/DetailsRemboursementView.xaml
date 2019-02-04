@@ -32,13 +32,14 @@
 		<TextBlock Grid.Row="3" Grid.Column="0" Text="Montant à rembourser" />
 		<TextBlock Grid.Row="3"  Grid.Column="1" Text="{Binding Path=CurrentPret.MontantARembourser, StringFormat=C2}" />
 
-		<ListBox x:Name="ListBoxEcheances" Grid.Row="4" Grid.ColumnSpan="2"
+		<ListBox x:Name="ListBoxEcheances" 
+				 Grid.Row="4" Grid.ColumnSpan="2"
 				 ItemsSource="{Binding CurrentPret.Echeances}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Echéance n° " />
-						<TextBlock Text="{Binding Id}" />
+						<TextBlock Text="{Binding ID}" />
 						<TextBlock Text=" le " />
 						<TextBlock Text="{Binding Date}" />
 						<TextBlock Text=" - Montant de " />

@@ -1,4 +1,4 @@
-﻿namespace PretImmo2018.Services.Interfaces
+﻿namespace PretImmo2018.Model.Interfaces
 {
 	/// <summary>
 	/// Interface d'objet identifiable.

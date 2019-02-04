@@ -1,6 +1,5 @@
-﻿using PretImmo2018.Models;
+﻿using PretImmo2018.Model;
 using Prism.Mvvm;
-using System.Collections.Generic;
 
 namespace PretImmoWPF.ViewModels
 {

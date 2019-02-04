@@ -145,6 +145,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PretImmo2018.DAL\PretImmo2018.DAL.csproj">
+      <Project>{b25688b6-5dc3-4c4f-afed-989697046564}</Project>
+      <Name>PretImmo2018.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PretImmo2018.Model\PretImmo2018.Model.csproj">
+      <Project>{19052520-06ab-48f1-a13e-a3a56d4255ae}</Project>
+      <Name>PretImmo2018.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PretImmo2018\PretImmo2018.csproj">
       <Project>{0135fe26-968f-4922-9066-edc2c61e63db}</Project>
       <Name>PretImmo2018</Name>

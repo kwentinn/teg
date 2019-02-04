@@ -1,20 +1,13 @@
-﻿using PretImmo2018.Services.Interfaces;
+﻿using PretImmo2018.Model.Base;
 using System;
 using System.Collections.Generic;
 
-namespace PretImmo2018.Models
+namespace PretImmo2018.Model
 {
-	public class Pret : IEquatable<Pret>, IIdentifiable
+	public class Pret : IdentifiableObject
 	{
-		#region IIdentifiable
-
-		public int ID { get; set; }
-
-		#endregion
-
 		#region  props saisies
 
-		public int Id { get; set; }
 		public string Nom { get; set; }
 
 		public double MontantBien { get; set; }
@@ -51,14 +44,5 @@ namespace PretImmo2018.Models
 		{
 			Echeances = new List<Echeance>();
 		}
-
-		#region IEquatable
-
-		public bool Equals(Pret other)
-		{
-			return Id == other.Id;
-		}
-
-		#endregion
 	}
 }

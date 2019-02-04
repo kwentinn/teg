@@ -1,4 +1,5 @@
-﻿using PretImmo2018.Models;
+﻿using PretImmo2018.DAL;
+using PretImmo2018.Model;
 using PretImmo2018.Services.Interfaces;
 using PretImmoWPF.Commands;
 using Prism.Commands;
@@ -8,7 +9,7 @@ namespace PretImmoWPF.ViewModels
 {
 	public class PretViewModel : BindableBase
 	{
-		private readonly IPretService _pretService;
+		private readonly IRepository<Pret> _pretRepository;
 		private readonly IPretCalculator _pretCalculator;
 		private readonly IAppCommands _appCommands;
 
@@ -22,16 +23,11 @@ namespace PretImmoWPF.ViewModels
 			set { SetProperty(ref _currentPret, value); }
 		}
 
-		private string _nom;
-		public string Nom
+		public PretViewModel(IRepository<Pret> pretRepository,
+			IPretCalculator pretCalculator,
+			IAppCommands appCommands)
 		{
-			get { return _nom; }
-			set { SetProperty(ref _nom, value); }
-		}
-
-		public PretViewModel(IPretService pretService, IPretCalculator pretCalculator, IAppCommands appCommands)
-		{
-			_pretService = pretService;
+			_pretRepository = pretRepository;
 			_pretCalculator = pretCalculator;
 			_appCommands = appCommands;
 
@@ -44,8 +40,8 @@ namespace PretImmoWPF.ViewModels
 			if (CurrentPret == null)
 				return;
 
-			_pretService.Add(CurrentPret);
-			_pretService.Save();
+			//_pretRepository.Add(CurrentPret);
+			_pretRepository.Save();
 		}
 
 		private void Calculate()

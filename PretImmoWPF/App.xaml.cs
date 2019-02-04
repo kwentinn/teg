@@ -1,14 +1,15 @@
-﻿using PretImmo2018.Models;
+﻿using PretImmo2018.DAL;
+using PretImmo2018.Model;
 using PretImmo2018.Services;
 using PretImmo2018.Services.Interfaces;
 using PretImmoWPF.Commands;
 using PretImmoWPF.Config;
-using PretImmoWPF.ViewModels;
 using PretImmoWPF.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
+using System.Globalization;
 using System.Windows;
 
 namespace PretImmoWPF
@@ -20,6 +21,9 @@ namespace PretImmoWPF
 	{
 		protected override Window CreateShell()
 		{
+			CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("fr-FR");
+			CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("fr-FR");
+
 			return Container.Resolve<MainWindow>();
 		}
 
@@ -30,9 +34,9 @@ namespace PretImmoWPF
 
 			// on indique comment sont sérialisés les classes (Pret en l'occurence).
 			containerRegistry.RegisterSingleton<IRepository<Pret>, JsonRepository<Pret>>();
+			containerRegistry.RegisterSingleton<IPretService, PretService>();
 
 			// services
-			containerRegistry.RegisterSingleton<IPretService, PretService>();
 			containerRegistry.RegisterSingleton<IAppCommands, AppCommands>();
 
 			// nav
@@ -46,7 +50,9 @@ namespace PretImmoWPF
 
 		protected override void OnInitialized()
 		{
+
 			base.OnInitialized();
+
 			var regionManager = this.Container.Resolve<IRegionManager>();
 			regionManager.RegisterViewWithRegion(RegionNames.MainRegion, typeof(ListePretsView));
 			regionManager.RegisterViewWithRegion(RegionNames.ActionRegion, typeof(PretView));

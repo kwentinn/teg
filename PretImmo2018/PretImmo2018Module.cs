@@ -1,7 +1,4 @@
-﻿using PretImmo2018.Models;
-using PretImmo2018.Services;
-using PretImmo2018.Services.Interfaces;
-using Prism.Ioc;
+﻿using Prism.Ioc;
 using Prism.Modularity;
 using System;
 

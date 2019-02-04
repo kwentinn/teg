@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PretImmo2018", "PretImmo201
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PretImmoWPF", "PretImmoWPF\PretImmoWPF.csproj", "{B0D8AA50-4DFB-429E-8338-BE782EE6FCDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PretImmo2018.DAL", "PretImmo2018.DAL\PretImmo2018.DAL.csproj", "{B25688B6-5DC3-4C4F-AFED-989697046564}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PretImmo2018.Model", "PretImmo2018.Model\PretImmo2018.Model.csproj", "{19052520-06AB-48F1-A13E-A3A56D4255AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{B0D8AA50-4DFB-429E-8338-BE782EE6FCDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0D8AA50-4DFB-429E-8338-BE782EE6FCDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0D8AA50-4DFB-429E-8338-BE782EE6FCDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B25688B6-5DC3-4C4F-AFED-989697046564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B25688B6-5DC3-4C4F-AFED-989697046564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B25688B6-5DC3-4C4F-AFED-989697046564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B25688B6-5DC3-4C4F-AFED-989697046564}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19052520-06AB-48F1-A13E-A3A56D4255AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19052520-06AB-48F1-A13E-A3A56D4255AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19052520-06AB-48F1-A13E-A3A56D4255AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19052520-06AB-48F1-A13E-A3A56D4255AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

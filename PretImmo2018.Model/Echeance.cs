@@ -1,9 +1,10 @@
-﻿using PretImmo2018.Services.Interfaces;
+﻿using PretImmo2018.Model.Base;
+using PretImmo2018.Model.Interfaces;
 using System;
 
-namespace PretImmo2018.Models
+namespace PretImmo2018.Model
 {
-	public class Echeance: IIdentifiable
+	public class Echeance: IdentifiableObject
 	{
 		#region IIdentifiable
 

@@ -1,21 +1,17 @@
-﻿using PretImmo2018.Models;
+﻿using PretImmo2018.Model;
 using PretImmo2018.Services.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
-using System;
-using System.Collections.ObjectModel;
 
 namespace PretImmoWPF.ViewModels
 {
 	public class ListePretsViewModel : BindableBase
 	{
-		private readonly IPretService _pretService;
+		public IPretService PretService { get; private set; }
 
 		public DelegateCommand OnLoadedCommand { get; private set; }
 		public DelegateCommand AddPretCommand { get; private set; }
 		public DelegateCommand RemovePretCommand { get; private set; }
-
-		public ObservableCollection<Pret> Prets { get; private set; }
 
 		private Pret _selectedPret;
 		public Pret SelectedPret
@@ -29,39 +25,31 @@ namespace PretImmoWPF.ViewModels
 
 		public ListePretsViewModel(IPretService pretService)
 		{
-			_pretService = pretService;
+			PretService = pretService;
 
 			OnLoadedCommand = new DelegateCommand(OnLoad);
 			AddPretCommand = new DelegateCommand(AddPret);
 			RemovePretCommand = new DelegateCommand(RemovePret);
-
-			Prets = new ObservableCollection<Pret>();
 		}
 
 		private void RemovePret()
 		{
 			if (SelectedPret != null)
 			{
-				_pretService.Remove(SelectedPret.Id);
-				Prets.Remove(SelectedPret);
+				PretService.Remove(SelectedPret.ID);
 				SelectedPret = null;
 			}
 		}
 
 		private void OnLoad()
 		{
-			Prets.Clear();
-
-			var prets = _pretService.GetAll();
-
-			Prets.AddRange(prets);
+			//var prets = PretService.GetAll();
 		}
 
 		private void AddPret()
 		{
 			SelectedPret = new Pret();
-			_pretService.Add(SelectedPret);
-			Prets.Add(SelectedPret);
+			PretService.Add(SelectedPret);
 		}
 	}
 }

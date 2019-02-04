@@ -1,4 +1,4 @@
-﻿using PretImmo2018.Models;
+﻿using PretImmo2018.Model;
 using System.Collections.Generic;
 
 namespace PretImmo2018.Services.Interfaces

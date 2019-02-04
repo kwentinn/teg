@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace PretImmo2018.Models
+namespace PretImmo2018.Model
 {
 	public class PretMultiple : Pret
 	{

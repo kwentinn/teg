@@ -1,4 +1,5 @@
-﻿using PretImmo2018.Models;
+﻿using PretImmo2018.DAL;
+using PretImmo2018.Model;
 using PretImmo2018.Services.Interfaces;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,44 +11,38 @@ namespace PretImmo2018.Services
 	{
 		private readonly IRepository<Pret> _pretRepository;
 
-		public ObservableCollection<Pret> Prets { get; private set; }
-
+		public ObservableCollection<Pret> Prets { get; private set; } = new ObservableCollection<Pret>();
 
 		public PretService(IRepository<Pret> pretRepo)
 		{
 			_pretRepository = pretRepo;
 
-			Prets = new ObservableCollection<Pret>();
+			var list = _pretRepository.GetAll();
+
+			Prets.AddRange(list);
 		}
 
 		public void Add(Pret pret)
 		{
-			// choper le max id + 1 pour le nouvel id
-			var id = 0;
-			var prets = _pretRepository.GetAll();
-			if (prets.Any())
-			{
-				id = prets.Max(p => p.Id) + 1;
-			}
-			pret.Id = id;
-
+			_pretRepository.Add(pret);
 			Prets.Add(pret);
+		}
+
+		public Pret Get(int id)
+		{
+			return Prets.FirstOrDefault(p => id == p.ID);
 		}
 
 		public IEnumerable<Pret> GetAll()
 		{
-			Prets.Clear();
-			var prets = _pretRepository.GetAll();
-			foreach (var p in prets)
-			{
-				Prets.Add(p);
-			}
-			return prets;
+			return Prets;
 		}
 
 		public void Remove(int id)
 		{
-			var removedItem = _pretRepository.Remove(id);
+			_pretRepository.Remove(id);
+
+			var removedItem = Prets.FirstOrDefault(p => id == p.ID);
 			if (removedItem != null)
 			{
 				Prets.Remove(removedItem);
@@ -57,11 +52,6 @@ namespace PretImmo2018.Services
 		public void Save()
 		{
 			_pretRepository.Save();
-		}
-
-		public Pret Get(int id)
-		{
-			throw new System.NotImplementedException();
 		}
 	}
 }

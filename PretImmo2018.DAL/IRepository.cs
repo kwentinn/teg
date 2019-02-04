@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using PretImmo2018.Model.Base;
+using System.Collections.Generic;
 
-namespace PretImmo2018.Services.Interfaces
+namespace PretImmo2018.DAL
 {
 	/// <summary>
 	/// Contrat d'interface du pattern Repository.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public interface IRepository<T> where T : class, IIdentifiable
+	public interface IRepository<T> where T : IdentifiableObject
 	{
 		/// <summary>
 		/// Ajoute un objet de type <see cref="T"/>.
 		/// </summary>
 		/// <param name="obj"></param>
-		void Add(T obj);
+		T Add(T obj);
 
 		/// <summary>
 		/// Supprime un objet de type <see cref="T"/>.
