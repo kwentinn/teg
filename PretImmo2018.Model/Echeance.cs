@@ -6,12 +6,6 @@ namespace PretImmo2018.Model
 {
 	public class Echeance: IdentifiableObject
 	{
-		#region IIdentifiable
-
-		public int ID { get; set; }
-
-		#endregion
-
 		public DateTime	Date { get; set; }
 		public double Montant { get; set; }
 
