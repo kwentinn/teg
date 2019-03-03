@@ -1,5 +1,5 @@
-﻿using PretImmo2018.Models;
-using PretImmo2018.Services;
+﻿
+using PretImmo2018.Models;
 using System;
 using System.Collections.Generic;
 
@@ -9,138 +9,64 @@ namespace PretImmo2018
 	{
 		static void Main(string[] args)
 		{
-			var pretCalculator = new PretCalculator();
 
-			// ------------------------- //
-			var pretSeul = new Pret
-			{
-				Nom = "Crédit immo appart Carnon (teg de 1,50%)",
-				MontantBien = 263000,
-				Apport = 91186,
-				DureeEnAnnees = 15,
-				FraisNotariés = 18410,
-				TAEG = 1.50 / 100,
-				FraisDeGarantie = 2413,
-				DebutPret = new DateTime(2018, 12, 1)
-			};
-			pretCalculator.LancerCalculs(pretSeul);
-			AfficheRésultats(pretSeul);
-			// ------------------------- //
-			var pretSeul2 = new Pret
-			{
-				Nom = "Crédit immo appart Carnon (teg de 1,65%)",
-				MontantBien = 263000,
-				Apport = 91186,
-				DureeEnAnnees = 15,
-				FraisNotariés = 18410,
-				TAEG = 1.65 / 100,
-				FraisDeGarantie = 2413,
-				DebutPret = new DateTime(2018, 12, 1)
-			};
-			pretCalculator.LancerCalculs(pretSeul2);
-			AfficheRésultats(pretSeul2);
-			// ------------------------- //
-			var pretSeul3 = new Pret
-			{
-				Nom = "Crédit immo sans frais de notaire (teg de 1,65%)",
-				MontantBien = 263000,
-				Apport = 91186,
-				DureeEnAnnees = 15,
-				FraisNotariés = 0,
-				TAEG = 1.65 / 100,
-				FraisDeGarantie = 2413,
-				DebutPret = new DateTime(2018, 12, 1)
-			};
-			pretCalculator.LancerCalculs(pretSeul3);
-			AfficheRésultats(pretSeul3);
-			// ------------------------- //
-			var pret = new Pret
-			{
-				Nom = "Crédit immo appart Carnon",
-				MontantBien = 263000,
-				Apport = 91186,
-				DureeEnAnnees = 15,
-				//FraisNotariés = 19300,
-				TAEG = 1.5 / 100,
-				FraisDeGarantie = 2500,
-				DebutPret = new DateTime(2018, 12, 1)
-			};
-			var pret2 = new Pret
-			{
-				Nom = "Crédit pour frais de notaire",
-				MontantBien = 19300,
-				Apport = 0,
-				DureeEnAnnees = 4,
-				TAEG = 0.946 / 100,
-				DebutPret = new DateTime(2018, 12, 1)
-			};
-			var doublePret = new PretMultiple(new Pret[] { pret, pret2 })
-			{
-				Nom = "Prêt composé d'1 crédit appart + 1 crédit pour frais d'acte de vente",
-				DebutPret = new DateTime(2019, 2, 1)
-			};
-			pretCalculator.LancerCalculs(doublePret);
-			AfficherRésultats(doublePret);
-			// ------------------------- //
-			var pret3 = new Pret
-			{
-				Nom = "Crédit immo appart Carnon (1,52%)",
-				MontantBien = 263000,
-				Apport = 91186,
-				DureeEnAnnees = 14,
-				FraisNotariés = 0,
-				TAEG = 1.520 / 100,
-				FraisDeGarantie = 2500,
-				DebutPret = new DateTime(2018, 12, 1)
-			};
-			var pret4 = new Pret
-			{
-				Nom = "Crédit pour frais de notaire",
-				MontantBien = 19300,
-				Apport = 0,
-				DureeEnAnnees = 4,
-				TAEG = 0.946 / 100,
-				DebutPret = new DateTime(2018, 12, 1)
-			};
-			var doublePret2 = new PretMultiple(new Pret[] { pret3, pret4 })
-			{
-				Nom = "Double prêt 1.52% + 0.946%",
-				DebutPret = new DateTime(2019, 2, 1)
-			};
-			pretCalculator.LancerCalculs(doublePret2);
-			AfficherRésultats(doublePret2);
+            var montantBien = 263000;
+            var apport = 91186;
+            var fraisNotaires = 18410;
+            var montantAEmprunter = montantBien - apport + fraisNotaires;
+            var dureeEnAnnees = 15;  
+     
+            var pretSeul_1 = new Pret("Crédit immo (teg de 1,50%)", montantAEmprunter, dureeEnAnnees, 1.50 / 100, new DateTime(2018, 12, 1));
+            AffichePret(montantBien, fraisNotaires, apport, pretSeul_1);
+            
+            var pretSeul_2 = new Pret("Crédit immo (teg de 1,65%)", montantAEmprunter, dureeEnAnnees, 1.65/100, new DateTime(2018, 12, 1));
+            AffichePret(montantBien, fraisNotaires, apport, pretSeul_2);
 
-			var comp = new PretComparer();
-			var best = comp.GetBest(new List<Pret> { pretSeul, pretSeul2, pretSeul3 });
+            var fraisDeGarantie_3 = 2413;
+            var pretSeul_3 = new Pret("Crédit immo sans frais de notaire (teg de 1,65%)", montantAEmprunter - fraisNotaires + fraisDeGarantie_3, dureeEnAnnees, 1.65 / 100, new DateTime(2018, 12, 1));
+            AffichePret(montantBien, fraisNotaires, apport, pretSeul_3);
 
-			Console.ReadLine();
-		}
+            // PretMultiple
+            var fraisDeGarantie_A = 2500;
+            var dureeEnAnnees_A = 14;
+            var pret_A = new Pret("Crédit immo appart Carnon (1,52%)", montantAEmprunter - fraisNotaires, dureeEnAnnees_A, 1.520 / 100, new DateTime(2018, 12, 1));
+            AffichePret(montantBien, fraisNotaires, apport, pret_A);
 
-		/// <summary>
-		/// Affiche les résultats dans la console.
-		/// </summary>
-		public static void AfficheRésultats(Pret pret)
-		{
-			Console.WriteLine("#############################################");
-			Console.WriteLine($"CREDIT \"{pret.Nom}\"");
-			Console.WriteLine();
-			Console.WriteLine($"Montant du bien: {pret.MontantBien.ToString("N2")}");
-			Console.WriteLine($"Frais de notaire: {pret.FraisNotariés.ToString("N2")}");
-			Console.WriteLine($"Montant apport: {pret.Apport.ToString("N2")}");
-			Console.WriteLine($"TAEG: {pret.TAEG.ToString("P3")}");
-			Console.WriteLine($"MontantARembourser: {pret.MontantARembourser.ToString("N2")}");
-			Console.WriteLine($"Mensualités de {pret.Mensualités.ToString("N2")} sur {pret.DureeEnAnnees} ans");
-			Console.WriteLine($"Montant total du prêt {pret.MontantTotalPret.ToString("N2")}");
-			Console.WriteLine($"Coût du prêt {pret.CoutTotalPret.ToString("N2")}");
-			Console.WriteLine("#############################################");
-			Console.WriteLine();
-		}
-		public static void AfficherRésultats(PretMultiple pretMultiple)
-		{
-			pretMultiple.Prets.ForEach(pret => AfficheRésultats(pret));
+            var montantAEmprunterB = 19300;
+            var dureeEnAnnees_B = 4;
+            var pret_B = new Pret("Crédit pour frais de notaire", montantAEmprunterB, dureeEnAnnees_B, 0.946 / 100, new DateTime(2018, 12, 1));
+            AffichePret(montantBien, fraisNotaires, apport, pret_B);
 
-			Console.WriteLine($"Montant total de {pretMultiple.MontantTotalPret.ToString("N2")}");
-			Console.WriteLine($"Coût total de {pretMultiple.CoutTotalPret.ToString("N2")}");
-		}
-	}
+            var doublePret = new PretMultiple("Double prêt 1.52% + 0.946%", new List<Pret> { pret_A, pret_B });
+
+            Console.WriteLine($"Montant total de {doublePret.GetMontantTotal().ToString("N2")}");
+            Console.WriteLine($"Coût total de {doublePret.GetCoutTotal().ToString("N2")}");
+
+            //var comp = new PretComparer();
+            //var best = comp.GetBest(new List<Pret> { pretSeul, pretSeul2, pretSeul3 });
+
+            Console.ReadLine();
+        }
+          
+        /// <summary>
+        /// Affiche les résultats dans la console.
+        /// </summary>
+        public static void AffichePret(double montantBien, double fraisNotariés, double apport, Pret pret)
+        {
+            Console.WriteLine("#############################################");
+            Console.WriteLine($"CREDIT \"{pret.Nom}\"");
+            Console.WriteLine();
+            Console.WriteLine($"Montant du bien: {montantBien.ToString("N2")}");
+            Console.WriteLine($"Frais de notaire: {fraisNotariés.ToString("N2")}");
+            Console.WriteLine($"Montant apport: {apport.ToString("N2")}");
+            Console.WriteLine($"TAEG: {pret.GetTAEG().ToString("P3")}");
+            Console.WriteLine($"MontantAEmprunter: {pret.MontantAEmprunter.ToString("N2")}");
+            Console.WriteLine($"Mensualités de {pret.GetMensualitée().ToString("N2")} sur {pret.GetDureeEnMois()/12} ans");
+            Console.WriteLine($"Montant total du prêt {pret.GetMontantTotal().ToString("N2")}");
+            Console.WriteLine($"Coût du prêt {pret.GetCoutTotal().ToString("N2")}");
+            Console.WriteLine("#############################################");
+            Console.WriteLine();
+        }
+    }
+    
 }

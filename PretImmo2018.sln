@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PretImmo2018", "PretImmo2018\PretImmo2018.csproj", "{0135FE26-968F-4922-9066-EDC2C61E63DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PretImmo2018.Tests", "PretImmo2018.Tests\PretImmo2018.Tests.csproj", "{C065BF81-7B6D-420D-AD3D-90ACF5554FF6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0135FE26-968F-4922-9066-EDC2C61E63DB} = {0135FE26-968F-4922-9066-EDC2C61E63DB}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
