@@ -2,21 +2,27 @@
 
 namespace PretImmo2018.Models
 {
-	public class Echeance
+	public class Echeance : IComparable<Echeance>
 	{
-		public int Id { get; set; }
+        public Echeance(DateTime date, double mensualité)
+        {
+            Date = date;
+            Mensualité = mensualité;
+        }     
+        public DateTime	Date { get; private set; }  
+		public double CapitalRestantDû { get; private set; }
+        public double Mensualité { get; private set; }
+        public double MensualitéDontCapital { get { return Mensualité - MensualitéDontInterets; } }
+        public double MensualitéDontInterets { get; set; } 
 
-		public DateTime	Date { get; set; }
-		public double Montant { get; set; }
+        public int CompareTo(Echeance other)
+        {
+            return Date.CompareTo(other.Date);
+        }
 
-		public double CapitalRestantDû { get; set; }
-		public double IntérêtsPayés { get; set; }
-		public double CapitalRemboursé { get; set; }
-		public double MontantDesFrais { get; set; }
-
-		public override string ToString()
+        public override string ToString()
 		{
-			return $"En {Date.Year}: Mensualité de {Montant.ToString("C")} - Capital remboursé: {CapitalRemboursé.ToString("C")}";
+			return $"En {Date.Year}/{Date.Month}: {CapitalRestantDû.ToString("C")} {Mensualité.ToString("C")} {MensualitéDontCapital.ToString("C")} {MensualitéDontInterets.ToString("C")} ";
 		}
 	}
 }
